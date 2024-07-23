@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png">
+    <script src="https://kit.fontawesome.com/12be2a89a6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Приют для животных</title>
+</head>
+<body>
+    <!--1 Хэдер -->
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4"><i class="fa-solid fa-paw fa-beat"></i> Приют для животных</span>
+            </a>
+            <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page"><i class="fa-solid fa-house"></i> Главная</a></li>
+            <li class="nav-item"><a href="/pets" class="nav-link"><i class="fa-solid fa-cat"></i> Животные</a></li>
+            <li class="nav-item"><a href="/help" class="nav-link"><i class="fa-solid fa-handshake-angle"></i> Как нам помочь</a></li>
+            <li class="nav-item"><a href="/contacts" class="nav-link"><i class="fa-solid fa-globe"></i> Контакты</a></li>
+            <li class="nav-item"><a href="/qa" class="nav-link"><i class="fa-solid fa-question"></i> Вопросы</a></li>
+            </ul>
+        </header>
+    </div>
+    <div class="px-4 pt-5 my-5 text-center border-bottom">
+        <h1 class="display-4 fw-bold text-body-emphasis">Комментарии к котику</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Прочитайте другие комментарии и оставьте свой!</p>
+        </div>
+        </div>
+
+    <div class="px-4 my-5 text-center">
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+          <div class="card shadow-sm">
+            <img class="" src="{{cat.photo}}" width="100%" height="100%">
+            <div class="card-body">
+              <p class="card-text">Имя: {{cat.name}}</p>
+              <p class="card-text">Пол: {{cat.sex}}</p>
+              <p class="card-text">Порода: {{cat.breed}}</p>
+              <p class="card-text">Возраст: {{cat.age}}</p>
+              {{#if cat.wanted}}
+              <p class="card-text">На проверке администратора</p>
+              {{else if cat.adopted}}
+              <p class="card-text">Нашел свой дом</p>
+              {{else}}
+              <a href="/wantCat?index={{@index}}" type="button" class="btn btn-sm btn-outline-secondary">Забрать домой</a>
+              {{/if}}
+              <a href="/likeCat?id={{@index}}" class="btn btn-sm ms-3">
+                            <i class="fa-solid fa-heart" style="color: #d82222;"></i>
+                        </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-column justify-content-center align-items-center">
+          <div class="card shadow-sm">
+            <h3>Комментарии</h3>
+            <div class="card-body">
+              {{#each cat.comments}}
+              <p class="card-text">Имя: {{this.name}}</p>
+              <p class="card-text">Текст: {{this.text}}</p>
+              <hr>
+              {{/each}}
+              <form action="/commentCat" class="d-inline-block">
+  <div class="mb-3">
+    <label for="name" class="form-label">Имя</label>
+    <input type="text" class="form-select" id="name" name="name">
+  </input>
+  </div>
+  <div class="mb-3">
+    <label for="text" class="form-label">Текст</label>
+    <input type="textarea" class="form-select" id="text" name="text">
+  </input>
+  </div>
+  <input type="hidden" class="form-select" id="id" name="id" value="{{@index}}">
+  </input>
+  <a href="/addComment" type="submit" class="btn btn-primary">Оставить</a>
+</form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
